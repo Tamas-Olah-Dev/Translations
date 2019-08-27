@@ -47,6 +47,7 @@
             operationsUrl: {type: String},
             keyProperty: {type: String, default: 'id'},
             translationProperty: {type: String, default: 'translation'},
+            defaultLocales: {type: Array, default: []}
         },
         data: function () {
             return {
@@ -56,6 +57,7 @@
             }
         },
         mounted() {
+            this.localesToShow = this.defaultLocales;
             this.fetchTranslations();
         },
         methods: {
