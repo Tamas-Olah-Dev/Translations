@@ -1,0 +1,16 @@
+{
+    "name": "datalytix/translations",
+    "description": "A translation service provider override for Laravel to allow loading translations from DB",
+    "authors": [
+        {
+            "name": "Oláh Tamás",
+            "email": "olah.tamas@caleb.hu"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Datalytix\\Translations\\": "src/"
+        }
+    }
+}
