@@ -23,7 +23,10 @@ class DBLoader implements \Illuminate\Contracts\Translation\Loader
      */
     public function load($locale, $group, $namespace = null)
     {
-        return $this->translation->loadTranslations($locale);
+        if ($group === '*' && $namespace === '*') {
+            return $this->translation->loadTranslations($locale);
+        }
+        return [];
     }
 
     /**
