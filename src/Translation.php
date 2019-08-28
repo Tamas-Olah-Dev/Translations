@@ -7,6 +7,13 @@ namespace Datalytix\Translations;
 abstract class Translation extends \Illuminate\Database\Eloquent\Model implements ITranslation
 {
 
+    public function getCachedJSONTranslations($locale)
+    {
+        return \Cache::rememberForever($this->getCacheKey($locale), function() use ($locale) {
+            return json_encode($this->getTranslations($locale));
+        });
+    }
+
     public function getTranslations($locale)
     {
         return $this->loadTranslations($locale);
