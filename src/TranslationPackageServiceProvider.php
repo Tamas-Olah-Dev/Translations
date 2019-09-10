@@ -1,6 +1,6 @@
 <?php
 
-namespace Datalytix\VueCRUD;
+namespace Datalytix\Translations;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +25,11 @@ class TranslationPackageServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/js' => resource_path('js/components'),
+        ], 'translations-js');
+
+        $this->commands([
+            \Datalytix\Translations\Commands\FindMissingTranslations::class,
         ]);
     }
+
 }
