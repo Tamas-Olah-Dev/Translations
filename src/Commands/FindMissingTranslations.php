@@ -83,7 +83,9 @@ class FindMissingTranslations extends Command
         }
         $results = collect($unfilteredResults)->filter(function($item) use ($translations) {
             return array_search($item, $translations) === false;
-        })->unique()->all();
+        })->unique()->transform(function($item) {
+            return '"'.$item.'",';
+        });
         $filename = storage_path('app'.DIRECTORY_SEPARATOR.'translationkeys-'.now()->format('Y-m-d-H-i-s').'.txt');
         file_put_contents($filename, implode("\n", $results));
         $this->info('List generated: '.$filename);
