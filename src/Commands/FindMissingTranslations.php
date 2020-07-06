@@ -73,7 +73,10 @@ class FindMissingTranslations extends Command
         $unfilteredResults = [];
         foreach ($allfiles as $basepath => $files) {
             foreach ($files as $file) {
-                $content = file_get_contents($basepath.DIRECTORY_SEPARATOR.$file);
+                try {
+                    $content = file_get_contents($basepath.DIRECTORY_SEPARATOR.$file);
+                } catch (\Exception $e) {
+                }
                 $matches = [];
                 preg_match_all($this->translationFunctionPattern, $content, $matches);
                 if (count($matches[0]) > 0) {
