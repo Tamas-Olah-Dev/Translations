@@ -12,4 +12,5 @@ interface ITranslation
     public function getCachedJSONTranslations($locale);
     public function getTranslationsForEditor($locales);
     public function storeTranslation($key, $locale, $translation);
+    public function scopeForModel($query, $model, $localeId = null);
 }

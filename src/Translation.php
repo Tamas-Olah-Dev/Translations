@@ -29,4 +29,28 @@ abstract class Translation extends \Illuminate\Database\Eloquent\Model implement
     {
         return 'translation_'.$locale;
     }
+
+
+    public function scopeSelectLocaleFields($query, $model, $localeIds)
+    {
+        // https://modern-sql.com/use-case/pivot
+        // to be used with TranslatableModelScope
+        if (!method_exists($model, 'getTranslatedProperties')) {
+            throw new \Exception('Only to be used with TranslatableModel objects');
+        }
+        $fields = $model->getTranslatedProperties();
+        $selects = ['subject_id'];
+        foreach ($fields as $field) {
+            foreach ($localeIds as $localeId) {
+                $selects[] = \DB::raw('MAX(CASE WHEN field="'.$field.'" and locale_id="'.$localeId.'" THEN translation END) '.$field.'_'.$localeId);
+                if ($localeId == \App::getLocale()) {
+                    $selects[] = \DB::raw('MAX(CASE WHEN field="'.$field.'" and locale_id="'.$localeId.'" THEN translation END) '.$field);
+                }
+
+            }
+        }
+
+        return $query->select($selects);
+    }
+
 }

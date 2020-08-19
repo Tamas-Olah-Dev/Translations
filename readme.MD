@@ -1,5 +1,7 @@
 This package allows for loading translations from the DB instead of JSON/PHP files.
 
+The app.translationClass and app.localeClass need to be set to the respective class names. Locale needs its id to be the 2-char locale key Laravel uses, and it has to use the LocaleFunctions trait.
+
 In config/app.php replace the line 
 ```Illuminate\Translation\TranslationServiceProvider::class```
 
@@ -15,7 +17,7 @@ it needs to be bound in the boot() method of AppServiceProvider:
         });
 
 ```
-(there is an example in the Sample directory of the package for more reference)
+There is an example in the Sample directory of the package for more reference. The class needs to have subject_id, subjecttype_id, key and field columns for proper operation. Subjecttype_id binds to the class to be translated, subject_id binds to the instance, field sets the actual translated property and key is needed for the Laravel translation function's lookups.
 
 
 After saving a new translation the command 
