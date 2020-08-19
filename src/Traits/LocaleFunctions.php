@@ -6,8 +6,6 @@ namespace Datalytix\Translations\Traits;
 
 trait LocaleFunctions
 {
-    public $incrementing = false;
-
     public static function getYearMonth($year, $monthName, $locale = null)
     {
         $locale = $locale == null ? \App::getLocale() : $locale;
