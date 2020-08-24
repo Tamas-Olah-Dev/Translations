@@ -26,6 +26,11 @@ abstract class TranslatableModel extends Model
         );
     }
 
+    public function scopeWithoutTranslations($query)
+    {
+        return $query->withoutGlobalScope(TranslatableModelScope::class);
+    }
+
     public static function createWithTranslations($data)
     {
         $model = null;

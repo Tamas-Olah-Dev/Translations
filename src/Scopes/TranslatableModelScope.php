@@ -21,7 +21,7 @@ class TranslatableModelScope implements Scope
     public function apply(Builder $builder, Model $model)
     {
         $class = config('app.translationClass');
-        return $builder->joinSub(
+        return $builder->leftJoinSub(
             $class::forModel($model)->selectLocaleFields($model, [\App::getLocale()])->groupBy('subject_id'),
             'tr',
             'tr.subject_id',

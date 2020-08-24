@@ -25,7 +25,7 @@ class TranslatableModelAllLocalesScope implements Scope
         if ((!class_exists($class)) || (!class_exists($localeClass))) {
             throw new \Exception('Necessary configuration (app.translationClass, app.localeClass) not set!');
         }
-        return $builder->joinSub(
+        return $builder->leftJoinSub(
             $class::forModel($model)->selectLocaleFields($model, $localeClass::select('id')->get()->pluck('id'))->groupBy('subject_id'),
             'tr',
             'tr.subject_id',
