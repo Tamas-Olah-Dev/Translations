@@ -261,8 +261,14 @@ return [
     ['locale_id' => 'hu', 'key' => 'Please click the button below to verify your email address.', 'translation' => "Kattintson az alábbi gombra regisztrációs e-mailcíme megerősítéséhez:",],
     ['locale_id' => 'hu', 'key' => 'If you did not create an account, no further action is required.', 'translation' => "Ha nem ön kezdeményezte a regisztrációt, nincs további tennivalója.",],
     ['locale_id' => 'hu', 'key' => 'Reset Password Notification', 'translation' => "Értesítés jelszómódosítási kérelemről",],
+    ['locale_id' => 'hu', 'key' => 'Reset Password', 'translation' => "Új jelszó",],
     ['locale_id' => 'hu', 'key' => 'You are receiving this email because we received a password reset request for your account.', 'translation' => "Ezt a levelet azért kapta, mert a fiókján ön vagy valaki más jelszómódosítást kezdeményezett.",],
     ['locale_id' => 'hu', 'key' => 'This password reset link will expire in :count minutes.', 'translation' => "A fenti hivatkozás :count percig érvényes.",],
     ['locale_id' => 'hu', 'key' => 'If you did not request a password reset, no further action is required.', 'translation' => "Ha nem ön kezdeményezte a módosítást, nincs több tennivalója, a fiókja biztonságban van.",],
+    ['locale_id' => 'hu', 'key' => 'Whoops!', 'translation' => "Hiba történt!",],
+    ['locale_id' => 'hu', 'key' => 'Hello!', 'translation' => "Tisztelt felhasználónk!",],
+    ['locale_id' => 'hu', 'key' => 'Regards', 'translation' => "Üdvözlettel,",],
+    ['locale_id' => 'hu', 'key' => 'All rights reserved.', 'translation' => "Minden jog fenntartva.",],
+    ['locale_id' => 'hu', 'key' => "If you’re having trouble clicking the \":actionText\" button, copy and paste the URL below\ninto your web browser:", 'translation' => "Ha nem tudja megnyomni a(z) :actionText gombot, másolja be böngészőjébe az elábbi hivatkozást:",],
 
 ];
