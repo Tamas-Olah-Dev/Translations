@@ -34,6 +34,7 @@ return [
     ['locale_id' => 'hu', 'key' => 'All', 'translation' => 'Összes'],
     ['locale_id' => 'hu', 'key' => 'Page', 'translation' => 'Oldal'],
     ['locale_id' => 'hu', 'key' => 'Single page', 'translation' => 'Egy oldalra'],
+    ['locale_id' => 'hu', 'key' => 'Select/deselect all', 'translation' => 'Összes kijelölése/törlése'],
     ['locale_id'   => 'hu',
      'key'         => 'Operations on the selected items',
      'translation' => 'Műveletek a kijelölt elemekkel',
@@ -255,5 +256,13 @@ return [
     ['locale_id' => 'hu', 'key' => 'passwords.throttled', 'translation' => 'Túl sok próbálkozás, kérjük ismételje meg később.',],
     ['locale_id' => 'hu', 'key' => 'passwords.token', 'translation' => 'Érvénytelen hivatkozás.',],
     ['locale_id' => 'hu', 'key' => 'passwords.user', 'translation' => "Ezzel az e-mailcímmel nem található felhasználó.",],
+
+    ['locale_id' => 'hu', 'key' => 'Verify Email Address', 'translation' => "E-mailcím megerősítése",],
+    ['locale_id' => 'hu', 'key' => 'Please click the button below to verify your email address.', 'translation' => "Kattintson az alábbi gombra regisztrációs e-mailcíme megerősítéséhez:",],
+    ['locale_id' => 'hu', 'key' => 'If you did not create an account, no further action is required.', 'translation' => "Ha nem ön kezdeményezte a regisztrációt, nincs további tennivalója.",],
+    ['locale_id' => 'hu', 'key' => 'Reset Password Notification', 'translation' => "Értesítés jelszómódosítási kérelemről",],
+    ['locale_id' => 'hu', 'key' => 'You are receiving this email because we received a password reset request for your account.', 'translation' => "Ezt a levelet azért kapta, mert a fiókján ön vagy valaki más jelszómódosítást kezdeményezett.",],
+    ['locale_id' => 'hu', 'key' => 'This password reset link will expire in :count minutes.', 'translation' => "A fenti hivatkozás :count percig érvényes.",],
+    ['locale_id' => 'hu', 'key' => 'If you did not request a password reset, no further action is required.', 'translation' => "Ha nem ön kezdeményezte a módosítást, nincs több tennivalója, a fiókja biztonságban van.",],
 
 ];
