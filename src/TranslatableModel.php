@@ -119,9 +119,9 @@ abstract class TranslatableModel extends Model
                     'subject_id' => $this->id,
                     'subjecttype_id' => static::getSubjecttypeId(),
                     'locale_id' => $dataset['locale_id'],
-                    'key' => $this->id.'-'.static::getSubjecttypeId().'-'.$dataset['field'],
                     'field' => $dataset['field']
                 ], [
+                    'key' => $this->id.'-'.static::getSubjecttypeId().'-'.$dataset['field'],
                     'translation' => $dataset['translation'],
                 ]);
             }
