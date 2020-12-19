@@ -130,6 +130,17 @@ abstract class TranslatableModel extends Model
         return $transactionResult === null ? $this : false;
     }
 
+
+    public static function updateOrCreateWithTranslations(array $search, array $data)
+    {
+        $element = static::where($search)->first();
+        if ($element == null) {
+            return static::createWithTranslations($search + $data);
+        } else {
+            return $element->updateWithTranslations($data);
+        }
+    }
+
     /**
      * get the field names to generate accessors for
      * @return array
