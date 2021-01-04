@@ -44,7 +44,7 @@ abstract class Translation extends \Illuminate\Database\Eloquent\Model implement
             foreach ($localeIds as $localeId) {
                 $selects[] = \DB::raw('MAX(CASE WHEN field="'.$field.'" and locale_id="'.$localeId.'" THEN translation END) '.$field.'_'.$localeId);
                 if ($localeId == \App::getLocale()) {
-                    $selects[] = \DB::raw('MAX(CASE WHEN field="'.$field.'" and locale_id="'.$localeId.'" THEN translation END) '.$field);
+                    $selects[] = \DB::raw('MAX(CASE WHEN field="'.$field.'" and locale_id="'.$localeId.'" THEN translation END) '.$field.'_translated');
                 }
 
             }

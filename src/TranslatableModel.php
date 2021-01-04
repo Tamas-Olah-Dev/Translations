@@ -4,6 +4,7 @@
 namespace Datalytix\Translations;
 
 
+use App\Locale;
 use Datalytix\Translations\Scopes\TranslatableModelAllLocalesScope;
 use Datalytix\Translations\Scopes\TranslatableModelScope;
 use Illuminate\Database\Eloquent\Model;
@@ -35,26 +36,29 @@ abstract class TranslatableModel extends Model
     {
         $model = null;
         $transactionResult = \DB::transaction(function() use (&$model, $data) {
+            $mainLocale = Locale::getMainLocale();
             $processedFields = [];
             $translationDatasets = [];
             foreach (static::getTranslatedProperties() as $property) {
                 if (isset($data[$property])) {
                     $translationDatasets[] = [
                         'field' => $property,
-                        'locale_id' => \App::getLocale(),
+                        'locale_id' => $mainLocale->id,
                         'translation' => $data[$property]
                     ];
-                    $processedFields[] = $property;
+                    //$processedFields[] = $property;
                 }
             }
             foreach (static::getTranslatedPropertiesWithLocales() as $property) {
                 if (isset($data[$property])) {
                     $keyAndLocale = self::splitKeyToFieldAndLocale($property);
-                    $translationDatasets[] = [
-                        'field' => $keyAndLocale['field'],
-                        'locale_id' => $keyAndLocale['locale'],
-                        'translation' => $data[$property]
-                    ];
+                    if ($keyAndLocale['locale'] != $mainLocale->id) {
+                        $translationDatasets[] = [
+                            'field'       => $keyAndLocale['field'],
+                            'locale_id'   => $keyAndLocale['locale'],
+                            'translation' => $data[$property]
+                        ];
+                    }
                     $processedFields[] = $property;
                 }
             }
@@ -89,26 +93,29 @@ abstract class TranslatableModel extends Model
     public function updateWithTranslations($data)
     {
         $transactionResult = \DB::transaction(function() use ($data) {
+            $mainLocale = Locale::getMainLocale();
             $processedFields = [];
             $translationDatasets = [];
             foreach (static::getTranslatedProperties() as $property) {
                 if (isset($data[$property])) {
                     $translationDatasets[] = [
                         'field' => $property,
-                        'locale_id' => \App::getLocale(),
+                        'locale_id' => $mainLocale->id,
                         'translation' => $data[$property]
                     ];
-                    $processedFields[] = $property;
+                    //$processedFields[] = $property;
                 }
             }
             foreach (static::getTranslatedPropertiesWithLocales() as $property) {
                 if (isset($data[$property])) {
                     $keyAndLocale = self::splitKeyToFieldAndLocale($property);
-                    $translationDatasets[] = [
-                        'field' => $keyAndLocale['field'],
-                        'locale_id' => $keyAndLocale['locale'],
-                        'translation' => $data[$property]
-                    ];
+                    if ($keyAndLocale['locale'] != $mainLocale->id) {
+                        $translationDatasets[] = [
+                            'field' => $keyAndLocale['field'],
+                            'locale_id' => $keyAndLocale['locale'],
+                            'translation' => $data[$property]
+                        ];
+                    }
                     $processedFields[] = $property;
                 }
             }
@@ -162,8 +169,10 @@ abstract class TranslatableModel extends Model
 
     protected static function splitKeyToFieldAndLocale($key)
     {
+        $pieces = explode('_', $key);
+        return ['field' => $pieces[0], 'locale' => $pieces[1]];
         return [
-            'field' => \Str::beforeLast($key, '_'),
+            'field'  => \Str::beforeLast($key, '_'),
             'locale' => \Str::afterLast($key, '_')
         ];
     }
