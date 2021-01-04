@@ -169,8 +169,8 @@ abstract class TranslatableModel extends Model
 
     protected static function splitKeyToFieldAndLocale($key)
     {
-        $pieces = explode('_', $key);
-        return ['field' => $pieces[0], 'locale' => $pieces[1]];
+//        $pieces = explode('_', $key);
+//        return ['field' => $pieces[0], 'locale' => $pieces[1]];
         return [
             'field'  => \Str::beforeLast($key, '_'),
             'locale' => \Str::afterLast($key, '_')
