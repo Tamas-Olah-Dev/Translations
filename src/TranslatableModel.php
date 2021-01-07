@@ -36,7 +36,8 @@ abstract class TranslatableModel extends Model
     {
         $model = null;
         $transactionResult = \DB::transaction(function() use (&$model, $data) {
-            $mainLocale = Locale::getMainLocale();
+            $localeClass = config('app.localeClass');
+            $mainLocale = $localeClass::getMainLocale();
             $processedFields = [];
             $translationDatasets = [];
             foreach (static::getTranslatedProperties() as $property) {
@@ -93,7 +94,8 @@ abstract class TranslatableModel extends Model
     public function updateWithTranslations($data)
     {
         $transactionResult = \DB::transaction(function() use ($data) {
-            $mainLocale = Locale::getMainLocale();
+            $localeClass = config('app.localeClass');
+            $mainLocale = $localeClass::getMainLocale();
             $processedFields = [];
             $translationDatasets = [];
             foreach (static::getTranslatedProperties() as $property) {
