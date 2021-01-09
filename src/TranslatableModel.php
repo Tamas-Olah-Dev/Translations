@@ -53,13 +53,13 @@ abstract class TranslatableModel extends Model
             foreach (static::getTranslatedPropertiesWithLocales() as $property) {
                 if (isset($data[$property])) {
                     $keyAndLocale = self::splitKeyToFieldAndLocale($property);
-                    if ($keyAndLocale['locale'] != $mainLocale->id) {
-                        $translationDatasets[] = [
-                            'field'       => $keyAndLocale['field'],
-                            'locale_id'   => $keyAndLocale['locale'],
-                            'translation' => $data[$property]
-                        ];
-                    }
+                    //if ($keyAndLocale['locale'] != $mainLocale->id) {
+                    $translationDatasets[] = [
+                        'field'       => $keyAndLocale['field'],
+                        'locale_id'   => $keyAndLocale['locale'],
+                        'translation' => $data[$property]
+                    ];
+                    //}
                     $processedFields[] = $property;
                 }
             }
@@ -83,12 +83,12 @@ abstract class TranslatableModel extends Model
     public function remove()
     {
         return \DB::transaction(function() {
-            $translationClass = config('app.translationClass');
-            $translationClass::forModel($this)
-                ->where('subject_id', '=', $this->id)
-                ->delete();
-            $this->delete();
-        }) === null;
+                $translationClass = config('app.translationClass');
+                $translationClass::forModel($this)
+                    ->where('subject_id', '=', $this->id)
+                    ->delete();
+                $this->delete();
+            }) === null;
     }
 
     public function updateWithTranslations($data)
@@ -111,13 +111,13 @@ abstract class TranslatableModel extends Model
             foreach (static::getTranslatedPropertiesWithLocales() as $property) {
                 if (isset($data[$property])) {
                     $keyAndLocale = self::splitKeyToFieldAndLocale($property);
-                    if ($keyAndLocale['locale'] != $mainLocale->id) {
-                        $translationDatasets[] = [
-                            'field' => $keyAndLocale['field'],
-                            'locale_id' => $keyAndLocale['locale'],
-                            'translation' => $data[$property]
-                        ];
-                    }
+                    //if ($keyAndLocale['locale'] != $mainLocale->id) {
+                    $translationDatasets[] = [
+                        'field' => $keyAndLocale['field'],
+                        'locale_id' => $keyAndLocale['locale'],
+                        'translation' => $data[$property]
+                    ];
+                    //}
                     $processedFields[] = $property;
                 }
             }
