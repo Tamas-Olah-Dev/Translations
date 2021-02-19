@@ -14,7 +14,7 @@ class FindMissingTranslations extends Command
      *
      * @var string
      */
-    protected $signature = 'translations:findmissing {baselocale} {dirfilter}';
+    protected $signature = 'translations:findmissing {baselocale} {dirfilter?}';
 
     /**
      * The console command description.
