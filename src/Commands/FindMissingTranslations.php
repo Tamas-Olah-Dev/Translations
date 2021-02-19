@@ -14,7 +14,7 @@ class FindMissingTranslations extends Command
      *
      * @var string
      */
-    protected $signature = 'translations:findmissing {baselocale}';
+    protected $signature = 'translations:findmissing {baselocale} {dirfilter}';
 
     /**
      * The console command description.
@@ -61,6 +61,11 @@ class FindMissingTranslations extends Command
     public function handle()
     {
         $locale = $this->argument('baselocale');
+        if ($this->hasArgument('dirfilter')) {
+            $dirfilter = $this->argument('dirfilter');
+        } else {
+            $dirfilter = null;
+        }
         $translations = array_keys(app()->make('translation')->loadTranslations($locale));
         $path = base_path();
         $allfiles = [
@@ -73,6 +78,10 @@ class FindMissingTranslations extends Command
         $unfilteredResults = [];
         foreach ($allfiles as $basepath => $files) {
             foreach ($files as $file) {
+                $content = '';
+                if (($dirfilter !== null) && (strpos($basepath.DIRECTORY_SEPARATOR.$file, $dirfilter) === false)) {
+                    continue;
+                }
                 try {
                     $content = file_get_contents($basepath.DIRECTORY_SEPARATOR.$file);
                 } catch (\Exception $e) {

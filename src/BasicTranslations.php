@@ -63,6 +63,7 @@ return [
     ['locale_id' => 'hu', 'key' => 'Not a string', 'translation' => 'A mező értéke csak szöveg lehet.',],
     ['locale_id' => 'hu', 'key' => 'Already exists in database', 'translation' => 'A mező értéke már szerepel az adatbázisban.',],
     ['locale_id' => 'hu', 'key' => 'Position', 'translation' => 'Pozíció'],
+    ['locale_id' => 'hu', 'key' => 'Please review the invalid values and try again.', 'translation' => 'Kérjük ellenőrizze a hibás értékeket, és próbálja újra.'],
 
     //validation
 

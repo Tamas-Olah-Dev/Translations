@@ -15,7 +15,7 @@ it needs to be bound in the boot() method of AppServiceProvider:
         $this->app->singleton('Translation', function() {
             return new App\Translation();
         });
-
+        app()->bind('translation', \App\Translation::class);
 ```
 There is an example in the Sample directory of the package for more reference. The class needs to have subject_id, subjecttype_id, key and field columns for proper operation. Subjecttype_id binds to the class to be translated, subject_id binds to the instance, field sets the actual translated property and key is needed for the Laravel translation function's lookups.
 
