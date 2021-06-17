@@ -41,23 +41,23 @@ abstract class TranslatableModel extends Model
             $processedFields = [];
             $translationDatasets = [];
             foreach (static::getTranslatedProperties() as $property) {
-                if (isset($data[$property])) {
+                if (array_key_exists($property, $data)) {
                     $translationDatasets[] = [
                         'field' => $property,
                         'locale_id' => $mainLocale->id,
-                        'translation' => $data[$property]
+                        'translation' => (string)$data[$property]
                     ];
                     //$processedFields[] = $property;
                 }
             }
             foreach (static::getTranslatedPropertiesWithLocales() as $property) {
-                if (isset($data[$property])) {
+                if (array_key_exists($property, $data)) {
                     $keyAndLocale = self::splitKeyToFieldAndLocale($property);
                     //if ($keyAndLocale['locale'] != $mainLocale->id) {
                     $translationDatasets[] = [
                         'field'       => $keyAndLocale['field'],
                         'locale_id'   => $keyAndLocale['locale'],
-                        'translation' => $data[$property]
+                        'translation' => (string)$data[$property]
                     ];
                     //}
                     $processedFields[] = $property;
@@ -70,7 +70,7 @@ abstract class TranslatableModel extends Model
                     'subject_id' => $model->id,
                     'subjecttype_id' => static::getSubjecttypeId(),
                     'locale_id' => $dataset['locale_id'],
-                    'translation' => $dataset['translation'],
+                    'translation' => (string)$dataset['translation'],
                     'key' => $model->id.'-'.static::getSubjecttypeId().'-'.$dataset['field'],
                     'field' => $dataset['field']
                 ]);
@@ -99,23 +99,23 @@ abstract class TranslatableModel extends Model
             $processedFields = [];
             $translationDatasets = [];
             foreach (static::getTranslatedProperties() as $property) {
-                if (isset($data[$property])) {
+                if (array_key_exists($property, $data)) {
                     $translationDatasets[] = [
                         'field' => $property,
                         'locale_id' => $mainLocale->id,
-                        'translation' => $data[$property]
+                        'translation' => (string)$data[$property]
                     ];
                     //$processedFields[] = $property;
                 }
             }
             foreach (static::getTranslatedPropertiesWithLocales() as $property) {
-                if (isset($data[$property])) {
+                if (array_key_exists($property, $data)) {
                     $keyAndLocale = self::splitKeyToFieldAndLocale($property);
                     //if ($keyAndLocale['locale'] != $mainLocale->id) {
                     $translationDatasets[] = [
                         'field' => $keyAndLocale['field'],
                         'locale_id' => $keyAndLocale['locale'],
-                        'translation' => $data[$property]
+                        'translation' => (string)$data[$property]
                     ];
                     //}
                     $processedFields[] = $property;

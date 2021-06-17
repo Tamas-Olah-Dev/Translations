@@ -50,3 +50,10 @@ where
 - key-property is the identifying key of the translation model (not the ID, but rather a key that is shared by phrases across locales)
 - locales is an array of available locales in the app
  
+###Seeding
+
+With 2.0, models are now supposed to have all translatable fields as columns, storing the translations of the main locale. So if there is a Book object and the main locale is 'hu', this should look like this:
+
+- the 'books' table should have a 'title' field 
+- this field should contain the translation for the HU locale
+- when using updateWithTranslations or createWithTranslations, the datasets should not have 'title_hu' fields, as that translation is inferred from 'title'. So for 'hu' and 'en' translations the dataset should look like ``['title' => 'Title in Hungarian', 'title_en' => 'Title in English']``. 
