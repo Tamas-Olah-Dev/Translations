@@ -42,4 +42,14 @@ trait LocaleFunctions
         return $field.'_'.$this->id;
     }
 
+    public function formatName($subject, $separator = ' ')
+    {
+        // subject should have firstname and lastname properties
+        $nameorder = $this->nameorder == null ? 'lastname,firstname' : $this->nameorder;
+        $fields = explode(',', $nameorder);
+
+        return implode($separator, [$subject->{$fields[0]}, $subject->{$fields[1]}]);
+    }
+
+
 }

@@ -66,13 +66,14 @@ abstract class TranslatableModel extends Model
             $model = static::query()->create(collect($data)->except($processedFields)->all());
             $translationClass = config('app.translationClass');
             foreach ($translationDatasets as $dataset) {
-                $translationClass::create([
+                $translationClass::updateOrCreate([
                     'subject_id' => $model->id,
                     'subjecttype_id' => static::getSubjecttypeId(),
                     'locale_id' => $dataset['locale_id'],
-                    'translation' => (string)$dataset['translation'],
                     'key' => $model->id.'-'.static::getSubjecttypeId().'-'.$dataset['field'],
                     'field' => $dataset['field']
+                ], [
+                    'translation' => (string)$dataset['translation'],
                 ]);
             }
         });
