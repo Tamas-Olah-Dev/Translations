@@ -37,7 +37,11 @@ abstract class TranslatableModel extends Model
         $model = null;
         $transactionResult = \DB::transaction(function() use (&$model, $data) {
             $localeClass = config('app.localeClass');
-            $mainLocale = $localeClass::getMainLocale();
+            if (method_exists(static::class, 'getMainLocaleOfData')) {
+                $mainLocale = static::getMainLocaleOfData($data);
+            } else {
+                $mainLocale = $localeClass::getMainLocale();
+            }
             $processedFields = [];
             $translationDatasets = [];
             foreach (static::getTranslatedProperties() as $property) {
@@ -96,7 +100,12 @@ abstract class TranslatableModel extends Model
     {
         $transactionResult = \DB::transaction(function() use ($data) {
             $localeClass = config('app.localeClass');
-            $mainLocale = $localeClass::getMainLocale();
+            if (method_exists(static::class, 'getMainLocaleOfData')) {
+                $mainLocale = static::getMainLocaleOfData($data);
+            } else {
+                $mainLocale = $localeClass::getMainLocale();
+            }
+
             $processedFields = [];
             $translationDatasets = [];
             foreach (static::getTranslatedProperties() as $property) {
